@@ -152,7 +152,8 @@ class CalendarHandler {
         workweek: true,
       },
       month: {
-        dayNames: [t('Sun'), t('Mon'), t('Tue'), t('Wed'), t('Thu'), t('Fri'), t('Sat')],
+        //dayNames: [t('Sun'), t('Mon'), t('Tue'), t('Wed'), t('Thu'), t('Fri'), t('Sat')],
+        dayNames: [t('Mon'), t('Tue'), t('Wed'), t('Thu'), t('Fri')],
       },
       usageStatistics: false,
       theme: this._calendarTheme(),
