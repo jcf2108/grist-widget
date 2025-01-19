@@ -166,10 +166,29 @@ class CalendarHandler {
       defaultView: 'week',
       isReadOnly,
       template: {
-        time(event) {
+        /*time(event) {
           const {title} = event;
           const sanitizedTitle = title.replace('"','&quot;').trim();
           return `<span title="${sanitizedTitle}">${title}</span>`;
+        },*/
+        time(event) {
+          const {start, end, title} = event;
+        
+          // Formater les heures en 24 heures
+          const formatTime = (date) => {
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+          };
+        
+          const startTime = formatTime(start);
+          const endTime = formatTime(end);
+        
+          // Assainir le titre pour éviter les problèmes avec les caractères spéciaux
+          const sanitizedTitle = title.replace('"', '&quot;').trim();
+        
+          // Rendu final incluant le format d'heure et le titre
+          return `<span title="${sanitizedTitle}">${startTime} - ${endTime} ${sanitizedTitle}</span>`;
         },
         allday(event) {
           const {title} = event;
