@@ -148,11 +148,12 @@ class CalendarHandler {
       week: {
         taskView: false,
         dayNames: [t('Sun'), t('Mon'), t('Tue'), t('Wed'), t('Thu'), t('Fri'), t('Sat')],
-        startDayOfWeek: 0,
+        startDayOfWeek: 1,
         workweek: false,
       },
       month: {
         dayNames: [t('Sun'), t('Mon'), t('Tue'), t('Wed'), t('Thu'), t('Fri'), t('Sat')],
+        startDayOfWeek: 1,
         workweek: false,
       },
       usageStatistics: false,
