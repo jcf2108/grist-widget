@@ -758,6 +758,7 @@ function buildCalendarEventObject(record, colTypes, colOptions) {
   if (type?.choiceOptions?.[selected]?.fontStrikethrough) {
     textDecoration = textDecoration === 'underline' ? 'line-through underline' : 'line-through';
   }
+  console.log("buildCalendarEventObject :",record.ville);
   return {
     id: record.id,
     calendarId: CALENDAR_NAME,
