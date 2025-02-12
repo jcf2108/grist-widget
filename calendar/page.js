@@ -46,7 +46,7 @@ function isRecordValid(record) {
     record.endDate instanceof Date ;
     const hasTitle = typeof record.title === 'string';
   const maybeHasIsAllDay = record.isAllDay === undefined || typeof record.isAllDay === 'boolean';
-  const maybeHasVille = record.ville === undefined || typeof record.ville === 'string'; // Ajout de la vérification de ville
+  const maybeHasVille = typeof record.ville === 'string';
 
   return hasStartDate && maybeHasEndDate && hasTitle && maybeHasIsAllDay && maybeHasVille;
   //return hasStartDate && maybeHasEndDate && hasTitle && maybeHasIsAllDay;
