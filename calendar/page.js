@@ -167,7 +167,7 @@ class CalendarHandler {
       isReadOnly,
       template: {
         time(event) {
-          const {start, title} = event;
+          const {start, title, Ville} = event;
         
           // Formater l'heure de début au format 24 heures
           const formatTime = (date) => {
@@ -180,9 +180,12 @@ class CalendarHandler {
         
           // Assainir le titre pour éviter les problèmes avec les caractères spéciaux
           const sanitizedTitle = title.replace('"', '&quot;').trim();
-        
+          
+          // Assainir la ville pour éviter les problèmes avec les caractères spéciaux
+          const sanitizedVille = Ville ? Ville.replace('"', '&quot;').trim() : "";
+
           // Rendu final incluant uniquement l'heure de début et le titre
-          return `<span title="${sanitizedTitle}">${startTime} ${sanitizedTitle}</span><br />`;
+          return `<span title="${sanitizedTitle}">${startTime} ${sanitizedVille}<br />${sanitizedTitle}</span>`;
         },
 
         allday(event) {
@@ -488,6 +491,14 @@ function getGristOptions() {
       optional: false,
       type: "Text",
       description: t("title of event"),
+      allowMultiple: false
+    },
+    {
+      name: "Ville",
+      title: t("Ville"),
+      optional: true,
+      type: "Text",
+      description: t("Nom de la ville"),
       allowMultiple: false
     },
     {
