@@ -184,7 +184,7 @@ class CalendarHandler {
           
           // Assainir la ville pour éviter les problèmes avec les caractères spéciaux
           //const sanitizedVille = ville ? ville.replace('"', '&quot;').trim() : "";
-
+          console.log("ville template:",ville);
           // Rendu final incluant uniquement l'heure de début et le titre
           return `<span title="${sanitizedTitle}">${startTime} ${ville}<br />${sanitizedTitle}</span>`;
         },
