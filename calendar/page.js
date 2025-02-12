@@ -787,8 +787,12 @@ async function updateCalendar(records, mappings) {
   if (mappings) { colTypesFetcher.gotMappings(mappings); }
 
   const mappedRecords = grist.mapColumnNames(records, mappings);
+  console.log
   // if any records were successfully mapped, create or update them in the calendar
   if (mappedRecords) {
+    mappedRecords.forEach(record => {
+          console.log("Record with ville (updateCalendar) :", record.ville);
+        });
     const colTypes = await colTypesFetcher.getColTypes();
     const colOptions = await colTypesFetcher.getColOptions();
     const events = mappedRecords
