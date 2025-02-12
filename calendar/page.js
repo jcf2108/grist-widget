@@ -167,7 +167,7 @@ class CalendarHandler {
       isReadOnly,
       template: {
         time(event) {
-          const {start, title, Ville} = event;
+          const {start, title, ville} = event;
         
           // Formater l'heure de début au format 24 heures
           const formatTime = (date) => {
@@ -182,7 +182,7 @@ class CalendarHandler {
           const sanitizedTitle = title.replace('"', '&quot;').trim();
           
           // Assainir la ville pour éviter les problèmes avec les caractères spéciaux
-          const sanitizedVille = Ville;
+          const sanitizedVille = ville ? ville.replace('"', '&quot;').trim() : "";
 
           // Rendu final incluant uniquement l'heure de début et le titre
           return `<span title="${sanitizedTitle}">${startTime} ${sanitizedVille}<br />${sanitizedTitle}</span>`;
@@ -494,7 +494,7 @@ function getGristOptions() {
       allowMultiple: false
     },
     {
-      name: "Ville",
+      name: "ville",
       title: t("Ville"),
       optional: true,
       type: "Text",
@@ -678,6 +678,7 @@ async function upsertEvent(tuiEvent) {
     endDate: tuiEvent.end ? makeGristDateTime(tuiEvent.end, endType) : undefined,
     isAllDay: tuiEvent.isAllday !== undefined ? (tuiEvent.isAllday ? 1 : 0) : undefined,
     title: tuiEvent.title !== undefined ? (tuiEvent.title || "New Event") : undefined,
+    ville: tuiEvent.ville !== undefined ? (tuiEvent.ville || "Lieu Inconnu") : undefined,
   }
   upsertGristRecord(gristEvent);
 }
@@ -760,6 +761,7 @@ function buildCalendarEventObject(record, colTypes, colOptions) {
     id: record.id,
     calendarId: CALENDAR_NAME,
     title: record.title,
+    ville: record.ville,
     start,
     end,
     isAllday,
