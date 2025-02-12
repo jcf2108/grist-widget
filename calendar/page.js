@@ -183,10 +183,10 @@ class CalendarHandler {
           const sanitizedTitle = title.replace('"', '&quot;').trim();
           
           // Assainir la ville pour éviter les problèmes avec les caractères spéciaux
-          const sanitizedVille = ville ? ville.replace('"', '&quot;').trim() : "";
+          //const sanitizedVille = ville ? ville.replace('"', '&quot;').trim() : "";
 
           // Rendu final incluant uniquement l'heure de début et le titre
-          return `<span title="${sanitizedTitle}">${startTime} ${sanitizedVille}<br />${sanitizedTitle}</span>`;
+          return `<span title="${sanitizedTitle}">${startTime} ${ville}<br />${sanitizedTitle}</span>`;
         },
 
         allday(event) {
@@ -762,7 +762,7 @@ function buildCalendarEventObject(record, colTypes, colOptions) {
     id: record.id,
     calendarId: CALENDAR_NAME,
     title: record.title,
-    ville: record.ville,
+    ville: record.ville ? record.ville.replace('"', '&quot;').trim() : "Ville Indéfinie",
     start,
     end,
     isAllday,
@@ -790,9 +790,6 @@ async function updateCalendar(records, mappings) {
   console.log
   // if any records were successfully mapped, create or update them in the calendar
   if (mappedRecords) {
-    mappedRecords.forEach(record => {
-          console.log("Record with ville (updateCalendar) :", record.ville);
-        });
     const colTypes = await colTypesFetcher.getColTypes();
     const colOptions = await colTypesFetcher.getColOptions();
     const events = mappedRecords
