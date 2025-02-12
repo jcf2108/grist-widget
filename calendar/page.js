@@ -183,7 +183,7 @@ class CalendarHandler {
           
           // Assainir la ville pour éviter les problèmes avec les caractères spéciaux
           const sanitizedVille = ville ? ville.replace('"', '&quot;').trim() : "";
-
+          console.log(ville);
           // Rendu final incluant uniquement l'heure de début et le titre
           return `<span title="${sanitizedTitle}">${startTime} ${sanitizedVille}<br />${sanitizedTitle}</span>`;
         },
@@ -757,7 +757,7 @@ function buildCalendarEventObject(record, colTypes, colOptions) {
   if (type?.choiceOptions?.[selected]?.fontStrikethrough) {
     textDecoration = textDecoration === 'underline' ? 'line-through underline' : 'line-through';
   }
-  console.log(record);
+
   return {
     id: record.id,
     calendarId: CALENDAR_NAME,
@@ -787,6 +787,7 @@ async function updateCalendar(records, mappings) {
   if (mappings) { colTypesFetcher.gotMappings(mappings); }
 
   const mappedRecords = grist.mapColumnNames(records, mappings);
+  console.log("Données récupérées depuis Grist :", mappedRecords);
   // if any records were successfully mapped, create or update them in the calendar
   if (mappedRecords) {
     const colTypes = await colTypesFetcher.getColTypes();
