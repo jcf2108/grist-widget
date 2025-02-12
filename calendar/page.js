@@ -46,7 +46,10 @@ function isRecordValid(record) {
     record.endDate instanceof Date ;
     const hasTitle = typeof record.title === 'string';
   const maybeHasIsAllDay = record.isAllDay === undefined || typeof record.isAllDay === 'boolean';
-  return hasStartDate && maybeHasEndDate && hasTitle && maybeHasIsAllDay;
+  const maybeHasVille = record.ville === undefined || typeof record.ville === 'string'; // Ajout de la vérification de ville
+
+  return hasStartDate && maybeHasEndDate && hasTitle && maybeHasIsAllDay && maybeHasVille;
+  //return hasStartDate && maybeHasEndDate && hasTitle && maybeHasIsAllDay;
 }
 
 function getMonthName() {
@@ -183,7 +186,7 @@ class CalendarHandler {
           
           // Assainir la ville pour éviter les problèmes avec les caractères spéciaux
           const sanitizedVille = ville ? ville.replace('"', '&quot;').trim() : "";
-          console.log("Ville :",ville);
+
           // Rendu final incluant uniquement l'heure de début et le titre
           return `<span title="${sanitizedTitle}">${startTime} ${sanitizedVille}<br />${sanitizedTitle}</span>`;
         },
@@ -757,7 +760,6 @@ function buildCalendarEventObject(record, colTypes, colOptions) {
   if (type?.choiceOptions?.[selected]?.fontStrikethrough) {
     textDecoration = textDecoration === 'underline' ? 'line-through underline' : 'line-through';
   }
-console.log("Avant transformation (ville) :", record.ville);
   return {
     id: record.id,
     calendarId: CALENDAR_NAME,
