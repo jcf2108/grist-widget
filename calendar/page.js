@@ -183,7 +183,8 @@ class CalendarHandler {
           const sanitizedTitle = title.replace('"', '&quot;').trim();
           
           // Rendu final incluant uniquement l'heure de début et le titre
-          return `<span title="${sanitizedTitle}">${startTime}<br />${sanitizedTitle}</span>`;
+          if (startTime == "00:00") return `<span title="${sanitizedTitle}">${sanitizedTitle}</span>`;
+          else return `<span title="${sanitizedTitle}">${startTime}<br />${sanitizedTitle}</span>`;
         },
 
         allday(event) {
